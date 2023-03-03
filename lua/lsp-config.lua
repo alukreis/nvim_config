@@ -7,10 +7,16 @@ local function lsp_config_wrapper(lspCmd, lsp_setup)
   end
 end
 
+local function on_attach(_, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  --local bufferOptions = { noremap=true, silent=true, buffer=bufnr }
+end
+
 lsp_config_wrapper(
   'lua-language-server',
   function ()
     require('lspconfig').lua_ls.setup({
+      on_attach = on_attach,
       settings = {
         Lua = {
           runtime = {
