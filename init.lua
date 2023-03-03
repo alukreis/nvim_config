@@ -1,2 +1,4 @@
+require('paq-enable')
 require('keymaps')
-require('plugs')
+require('options')
+require('lsp-config')
