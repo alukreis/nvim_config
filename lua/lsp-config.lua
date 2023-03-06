@@ -1,3 +1,5 @@
+local coq = require('coq')
+
 local function lsp_config_wrapper(lspCmd, lsp_setup)
   if vim.fn.executable(lspCmd) == 1
   then
@@ -8,14 +10,16 @@ local function lsp_config_wrapper(lspCmd, lsp_setup)
 end
 
 local function on_attach(_, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  --local bufferOptions = { noremap=true, silent=true, buffer=bufnr }
+  local bufferOptions = { noremap=true, silent=true, buffer=bufnr }
+
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufferOptions)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufferOptions)
 end
 
 lsp_config_wrapper(
   'lua-language-server',
   function ()
-    require('lspconfig').lua_ls.setup({
+    require('lspconfig').lua_ls.setup(coq.lsp_ensure_capabilities({
       on_attach = on_attach,
       settings = {
         Lua = {
@@ -34,6 +38,15 @@ lsp_config_wrapper(
           },
         },
       },
-    })
+    }))
+  end
+)
+
+lsp_config_wrapper(
+  'pylsp',
+  function ()
+    require('lspconfig').pylsp.setup(coq.lsp_ensure_capabilities({
+      on_attach = on_attach,
+    }))
   end
 )

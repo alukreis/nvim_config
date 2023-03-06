@@ -6,4 +6,7 @@ return {
   'nvim-lualine/lualine.nvim',
   'nvim-tree/nvim-web-devicons', -- For nvim-tree
   'nvim-tree/nvim-tree.lua',
+  'ms-jpq/coq-nvim',
+  'ms-jpq/coq.artifacts',
+  'ggandor/leap.nvim',
 }
