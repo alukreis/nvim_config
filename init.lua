@@ -1,6 +1,7 @@
 -- My files
 require('options') -- Always do this first, often other plugins require the options are set
 require('paq-enable')
+require('lazy')
 require('keymaps')
 require('lsp-config')
 
