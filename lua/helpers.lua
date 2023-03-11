@@ -39,7 +39,17 @@ local function are_coq_dependencies_installed()
   end
 end
 
+local function ensure_lsp_capabilities(lspConfig)
+  if are_coq_dependencies_installed() then
+    return require('coq').lsp_ensure_capabilities(lspConfig)
+  else
+    lspConfig.capabilities = require('cmp_nvim_lsp').default_capabilities()
+    return lspConfig
+  end
+end
+
 return {
   parse_version_string = parse_version_string,
+  ensure_lsp_capabilities = ensure_lsp_capabilities,
   are_coq_dependencies_installed = are_coq_dependencies_installed
 }

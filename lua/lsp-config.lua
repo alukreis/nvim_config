@@ -1,4 +1,4 @@
-local coq = require('coq')
+local helpers = require('helpers')
 
 local function lsp_config_wrapper(lspCmd, lsp_setup)
   if vim.fn.executable(lspCmd) == 1
@@ -19,7 +19,7 @@ end
 lsp_config_wrapper(
   'lua-language-server',
   function ()
-    require('lspconfig').lua_ls.setup(coq.lsp_ensure_capabilities({
+    require('lspconfig').lua_ls.setup(helpers.ensure_lsp_capabilities({
       on_attach = on_attach,
       settings = {
         Lua = {
@@ -45,7 +45,7 @@ lsp_config_wrapper(
 lsp_config_wrapper(
   'pylsp',
   function ()
-    require('lspconfig').pylsp.setup(coq.lsp_ensure_capabilities({
+    require('lspconfig').pylsp.setup(helpers.ensure_lsp_capabilities({
       on_attach = on_attach,
     }))
   end

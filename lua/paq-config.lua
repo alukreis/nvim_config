@@ -6,11 +6,13 @@ return {
   'neovim/nvim-lspconfig',
   'ggandor/leap.nvim',
   -- Lualine
-  'kyazdani42/nvim-web-devicons',
+  'kyazdani42/nvim-web-devicons', -- Also needed for trouble.nvim
   'nvim-lualine/lualine.nvim',
   -- Nvim Tree
   'nvim-tree/nvim-web-devicons',
   'nvim-tree/nvim-tree.lua',
+  -- Trouble
+  'folke/trouble.nvim',
   -- COQ stuff, only loaded if deps there
   {
     string.format('%s/%s', c.COQ_AUTHOR_NAME, c.COQ_NVIM_NAME), opt=true,
