@@ -50,3 +50,21 @@ lsp_config_wrapper(
     }))
   end
 )
+
+lsp_config_wrapper(
+  'tailwindcss-language-server',
+  function ()
+    require('lspconfig').tailwindcss.setup(helpers.ensure_lsp_capabilities({
+      on_attach = on_attach,
+    }))
+  end
+)
+
+lsp_config_wrapper(
+  'tsserver',
+  function ()
+    require('lspconfig').tsserver.setup(helpers.ensure_lsp_capabilities({
+      on_attach = on_attach,
+    }))
+  end
+)
