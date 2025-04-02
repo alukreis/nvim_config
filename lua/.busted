@@ -1,0 +1,7 @@
+return {
+  default = {
+    ROOT = {'.'},
+    verbose = true,
+    pattern = '_test'
+  }
+}
