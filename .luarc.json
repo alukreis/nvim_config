@@ -1,0 +1,9 @@
+{
+  "runtime.version": "LuaJIT",
+  "telemetry.enable": false,
+  "workspace.library": ["$VIMRUNTIME",
+        "${3rd}/luassert/library"],
+  "workspace.userThirdParty": ["$HOME/.config/nvim/lua/luaLanguageAddons"],
+  "workspace.checkThirdParty": "Apply",
+  "diagnostics.globals": ["vim"],
+}

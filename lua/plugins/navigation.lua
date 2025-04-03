@@ -11,8 +11,8 @@ local function setLeapBackdropHighlight()
 end
 
 local function unsetLeapExtraKeybinds()
-  vim.keymap.del({ "x", "o" }, "x")
-  vim.keymap.del({ "x", "o" }, "X")
+  vim.keymap.del({ 'x', 'o' }, 'x')
+  vim.keymap.del({ 'x', 'o' }, 'X')
 end
 
 local function disableNativeFileNavigation()
