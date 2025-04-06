@@ -12,22 +12,22 @@ return {
     local telescopeApi = require('telescope.builtin')
     return {
       shallow_merge({
-        '<leader>tf',
+        '<leader>ff',
         telescopeApi.find_files,
         desc = 'Telescope find files'
       }, commonKeymapOptions),
       shallow_merge({
-        '<leader>tg',
+        '<leader>fg',
         telescopeApi.live_grep,
         desc = 'Telescope live grep'
       }, commonKeymapOptions),
       shallow_merge({
-        '<leader>tb',
+        '<leader>fb',
         telescopeApi.buffers,
         desc = 'Telescope buffers'
       }, commonKeymapOptions),
       shallow_merge({
-        '<leader>th',
+        '<leader>fh',
         telescopeApi.help_tags,
         desc = 'Telescope help tags'
       }, commonKeymapOptions)

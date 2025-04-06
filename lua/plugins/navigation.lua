@@ -41,11 +41,6 @@ end
 return {
   {
     'ggandor/leap.nvim',
-    config = function ()
-      require('leap').add_default_mappings()
-      setLeapBackdropHighlight()
-      unsetLeapExtraKeybinds()
-    end,
     lazy = true,
     keys = {
       {
@@ -60,7 +55,12 @@ return {
         'gs',
         nil
       }
-    }
+    },
+    config = function ()
+      require('leap').add_default_mappings()
+      setLeapBackdropHighlight()
+      unsetLeapExtraKeybinds()
+    end
   },
   {
     'nvim-tree/nvim-tree.lua',
