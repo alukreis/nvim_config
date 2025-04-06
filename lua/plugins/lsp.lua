@@ -1,3 +1,5 @@
+local defaultLspConfig = require('../lsp_configs.default')
+
 return {
   'neovim/nvim-lspconfig',
   dependencies = { 'saghen/blink.cmp' },
@@ -5,17 +7,12 @@ return {
   -- example using `opts` for defining servers
   opts = {
     servers = {
-      pylsp = {},
-      ts_ls = {},
-      lua_ls = {
-        settings = {
-          Lua = {
-            version = 'LuaJIT',
-          },
-        },
-      },
-      tailwindcss = {},
-      rust_analyzer = {},
+      pylsp = defaultLspConfig,
+      ts_ls = defaultLspConfig,
+      lua_ls = defaultLspConfig,
+      bashls = defaultLspConfig,
+      tailwindcss = defaultLspConfig,
+      rust_analyzer = defaultLspConfig,
     }
   },
   config = function(_, opts)

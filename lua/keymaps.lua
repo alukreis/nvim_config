@@ -1,5 +1,5 @@
--- local nvimTreeApi = require('nvim-tree.api')
-local commonKeymapOptions = { noremap = true }
+local constants = require('config.constants')
+local commonKeymapOptions = constants.commonKeymapOptions
 
 vim.keymap.set('i', 'jk', '<ESC>', commonKeymapOptions)
 vim.keymap.set('x', 'jk', '<ESC>', commonKeymapOptions)

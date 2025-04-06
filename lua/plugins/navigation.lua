@@ -1,4 +1,3 @@
-
 local leapBackdropConfig = {
   fg = '#FF7119' -- a rust colour
 }
@@ -24,7 +23,7 @@ local openNvimTreeCommand = '<leader>eo'
 local closeNvimTreeCommand = '<leader>ec'
 local function mapNvimTreeCommands()
   local nvimTreeApi = require('nvim-tree.api')
-  local commonKeymapOptions = { noremap = true }
+  local commonKeymapOptions = require('../config.constants').commonKeymapOptions
   vim.keymap.set(
     'n',
     openNvimTreeCommand ,
@@ -47,7 +46,21 @@ return {
       setLeapBackdropHighlight()
       unsetLeapExtraKeybinds()
     end,
-    lazy = false
+    lazy = true,
+    keys = {
+      {
+        's',
+        nil
+      },
+      {
+        'S',
+        nil
+      },
+      {
+        'gs',
+        nil
+      }
+    }
   },
   {
     'nvim-tree/nvim-tree.lua',

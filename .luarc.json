@@ -3,7 +3,7 @@
   "telemetry.enable": false,
   "workspace.library": ["$VIMRUNTIME",
         "${3rd}/luassert/library"],
-  "workspace.userThirdParty": ["$HOME/.config/nvim/lua/luaLanguageAddons"],
+  "workspace.userThirdParty": ["$HOME/.config/nvim/lua/lua_language_addons"],
   "workspace.checkThirdParty": "Apply",
   "diagnostics.globals": ["vim"],
 }

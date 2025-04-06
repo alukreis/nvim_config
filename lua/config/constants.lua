@@ -1,0 +1,3 @@
+return {
+  commonKeymapOptions = { noremap = true }
+}
