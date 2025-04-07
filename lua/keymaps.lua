@@ -7,6 +7,3 @@ vim.keymap.set('t', 'jk', '<C-\\><C-n>', commonKeymapOptions)
 
 -- Open terminal below all buffers
 vim.keymap.set('n', '<leader>t', '<cmd>botright terminal<cr><cmd>resize 15<cr>', commonKeymapOptions)
-
--- Trouble binds
-vim.keymap.set('n', '<leader>tt', '<cmd>TroubleToggle<cr>', commonKeymapOptions)
