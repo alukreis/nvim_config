@@ -1,7 +1,7 @@
 
-root=true
+root = true
 
 [*.lua]
 
-indent_size=2
-indent_style="space"
+indent_size = 2
+indent_style = space

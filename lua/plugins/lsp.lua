@@ -1,4 +1,4 @@
-local defaultLspConfig = require('../lsp_configs.default')
+local defaultLspConfig = require('lsp_configs.default')
 
 return {
   'neovim/nvim-lspconfig',
@@ -13,7 +13,7 @@ return {
       bashls = defaultLspConfig,
       tailwindcss = defaultLspConfig,
       rust_analyzer = defaultLspConfig,
-    }
+    },
   },
   config = function(_, opts)
     local lspconfig = require('lspconfig')
@@ -21,5 +21,5 @@ return {
       config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
       lspconfig[server].setup(config)
     end
-  end
+  end,
 }

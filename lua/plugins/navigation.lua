@@ -1,12 +1,8 @@
 local leapBackdropConfig = {
-  fg = '#FF7119' -- a rust colour
+  fg = '#FF7119', -- a rust colour
 }
 local function setLeapBackdropHighlight()
-  vim.api.nvim_set_hl(
-    0,
-    'LeapBackdrop',
-    leapBackdropConfig
-  )
+  vim.api.nvim_set_hl(0, 'LeapBackdrop', leapBackdropConfig)
 end
 
 local function unsetLeapExtraKeybinds()
@@ -23,19 +19,9 @@ local openNvimTreeCommand = '<leader>eo'
 local closeNvimTreeCommand = '<leader>ec'
 local function mapNvimTreeCommands()
   local nvimTreeApi = require('nvim-tree.api')
-  local commonKeymapOptions = require('../config.constants').commonKeymapOptions
-  vim.keymap.set(
-    'n',
-    openNvimTreeCommand ,
-    nvimTreeApi.tree.focus,
-    commonKeymapOptions
-  )
-  vim.keymap.set(
-    'n',
-    closeNvimTreeCommand,
-    nvimTreeApi.tree.close,
-    commonKeymapOptions
-  )
+  local commonKeymapOptions = require('config.constants').commonKeymapOptions
+  vim.keymap.set('n', openNvimTreeCommand, nvimTreeApi.tree.focus, commonKeymapOptions)
+  vim.keymap.set('n', closeNvimTreeCommand, nvimTreeApi.tree.close, commonKeymapOptions)
 end
 
 return {
@@ -45,28 +31,28 @@ return {
     keys = {
       {
         's',
-        nil
+        nil,
       },
       {
         'S',
-        nil
+        nil,
       },
       {
         'gs',
-        nil
-      }
+        nil,
+      },
     },
-    config = function ()
+    config = function()
       require('leap').add_default_mappings()
       setLeapBackdropHighlight()
       unsetLeapExtraKeybinds()
-    end
+    end,
   },
   {
     'nvim-tree/nvim-tree.lua',
     lazy = true,
     dependencies = {
-      'nvim-tree/nvim-web-devicons'
+      'nvim-tree/nvim-web-devicons',
     },
     init = disableNativeFileNavigation,
     config = function()
@@ -81,8 +67,8 @@ return {
       },
       {
         closeNvimTreeCommand,
-        nil
-      }
-    }
+        nil,
+      },
+    },
   },
 }

@@ -12,6 +12,6 @@ return {
     end,
     init = function()
       vim.o.termguicolors = true
-    end
-  }
+    end,
+  },
 }

@@ -3,16 +3,16 @@ return {
     'nvim-lualine/lualine.nvim',
     opts = {},
     dependencies = {
-      'kyazdani42/nvim-web-devicons'
+      'kyazdani42/nvim-web-devicons',
     },
-    lazy = false
+    lazy = false,
   },
   {
     'folke/trouble.nvim',
     opts = {},
     dependencies = {
-      'kyazdani42/nvim-web-devicons'
+      'kyazdani42/nvim-web-devicons',
     },
-    lazy = false
-  }
+    lazy = false,
+  },
 }
