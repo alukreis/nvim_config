@@ -41,4 +41,3 @@ return {
   set_default_tabs_or_spaces = set_default_tabs_or_spaces,
   set_default_shell_if_windows = set_default_shell_if_windows,
 }
-
