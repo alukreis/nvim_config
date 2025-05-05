@@ -1,3 +1,4 @@
+local setters = require('helpers.setters')
 local constants = require('config.constants')
 local commonKeymapOptions = constants.commonKeymapOptions
 
@@ -15,3 +16,6 @@ vim.keymap.set(
 )
 -- Open diagnostic message for current line in hover panel
 vim.keymap.set('n', '<leader>h', vim.diagnostic.open_float, commonKeymapOptions)
+
+-- Set numbers
+vim.keymap.set('n', '<leader>n', setters.toggle_numbers, commonKeymapOptions)
