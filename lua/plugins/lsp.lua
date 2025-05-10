@@ -23,6 +23,7 @@ return {
       ts_ls = defaultLspConfig,
       lua_ls = defaultLspConfig,
       bashls = defaultLspConfig,
+      eslint = defaultLspConfig,
       angularls = shallow_merge(defaultLspConfig, {
         cmd = angularlsCommandTable,
         -- Needed otherwise doesn't really override cmd?!
