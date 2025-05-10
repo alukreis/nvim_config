@@ -1,4 +1,16 @@
+local shallow_merge = require('helpers.shallow-merge')
 local defaultLspConfig = require('lsp_configs.default')
+local masonPackagesPath = require('config.constants').masonPackagesPath
+
+local angularlsModulesPath = masonPackagesPath .. '/angular-language-server/node_modules'
+local angularlsCommandTable = {
+  'ngserver',
+  '--stdio',
+  '--tsProbeLocations',
+  angularlsModulesPath,
+  '--ngProbeLocations',
+  angularlsModulesPath .. '/@angular/language-server/node_modules',
+}
 
 return {
   'neovim/nvim-lspconfig',
@@ -11,6 +23,13 @@ return {
       ts_ls = defaultLspConfig,
       lua_ls = defaultLspConfig,
       bashls = defaultLspConfig,
+      angularls = shallow_merge(defaultLspConfig, {
+        cmd = angularlsCommandTable,
+        -- Needed otherwise doesn't really override cmd?!
+        on_new_config = function(newConfig)
+          newConfig.cmd = angularlsCommandTable
+        end,
+      }),
       tailwindcss = defaultLspConfig,
       rust_analyzer = defaultLspConfig,
     },
