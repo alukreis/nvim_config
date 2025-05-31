@@ -1,10 +1,9 @@
 return {
   'https://gitlab.com/schrieveslaach/sonarlint.nvim',
   dependencies = { 'mason-org/mason.nvim' },
-  config = function()
-    local sonarlint = require('sonarlint')
-    local sonarlintAnalyzersPath = vim.fn.expand('${MASON}/share/sonarlint-analyzers')
-    sonarlint.setup({
+  opts = function()
+    local sonarlintAnalyzersPath = vim.fn.expand('$MASON/share/sonarlint-analyzers')
+    return {
       server = {
         cmd = {
           'sonarlint-language-server',
@@ -19,6 +18,6 @@ return {
         'javascript',
         'typescript',
       },
-    })
+    }
   end,
 }
