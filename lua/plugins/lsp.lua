@@ -1,22 +1,9 @@
 local shallow_merge = require('helpers.shallow-merge')
 local defaultLspConfig = require('lsp_configs.default')
-local masonPackagesPath = require('config.constants').masonPackagesPath
-
-local angularlsModulesPath = masonPackagesPath .. '/angular-language-server/node_modules'
-local angularlsCommandTable = {
-  'ngserver',
-  '--stdio',
-  '--tsProbeLocations',
-  angularlsModulesPath,
-  '--ngProbeLocations',
-  angularlsModulesPath .. '/@angular/language-server/node_modules',
-}
 
 return {
   'neovim/nvim-lspconfig',
-  dependencies = { 'saghen/blink.cmp' },
-
-  -- example using `opts` for defining servers
+  dependencies = { 'saghen/blink.cmp', 'mason-org/mason.nvim' },
   opts = {
     servers = {
       pylsp = defaultLspConfig,
@@ -25,10 +12,18 @@ return {
       bashls = defaultLspConfig,
       eslint = defaultLspConfig,
       angularls = shallow_merge(defaultLspConfig, {
-        cmd = angularlsCommandTable,
         -- Needed otherwise doesn't really override cmd?!
         on_new_config = function(newConfig)
-          newConfig.cmd = angularlsCommandTable
+          local angularlsModulesPath =
+            vim.fn.expand('$MASON/packages/angular-language-server/node_modules')
+          newConfig.cmd = {
+            'ngserver',
+            '--stdio',
+            '--tsProbeLocations',
+            angularlsModulesPath,
+            '--ngProbeLocations',
+            angularlsModulesPath .. '/@angular/language-server/node_modules',
+          }
         end,
       }),
       tailwindcss = defaultLspConfig,
