@@ -3,13 +3,30 @@ local function disableNativeFileNavigation()
   vim.g.loaded_netrwPlugin = 1
 end
 
+local function generateTreeFindFile(nvimTreeApi)
+  return function()
+    nvimTreeApi.tree.find_file({
+      open = true,
+      focus = true,
+      update_root = true,
+    })
+  end
+end
+
 local openNvimTreeCommand = '<leader>eo'
 local closeNvimTreeCommand = '<leader>ec'
+local openNvimTreeOnFileCommand = '<leader>ef'
 local function mapNvimTreeCommands()
   local nvimTreeApi = require('nvim-tree.api')
   local commonKeymapOptions = require('config.constants').commonKeymapOptions
   vim.keymap.set('n', openNvimTreeCommand, nvimTreeApi.tree.focus, commonKeymapOptions)
   vim.keymap.set('n', closeNvimTreeCommand, nvimTreeApi.tree.close, commonKeymapOptions)
+  vim.keymap.set(
+    'n',
+    openNvimTreeOnFileCommand,
+    generateTreeFindFile(nvimTreeApi),
+    commonKeymapOptions
+  )
 end
 
 return {
@@ -31,6 +48,10 @@ return {
     },
     {
       closeNvimTreeCommand,
+      nil,
+    },
+    {
+      openNvimTreeOnFileCommand,
       nil,
     },
   },
