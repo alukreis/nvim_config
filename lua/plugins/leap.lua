@@ -1,17 +1,18 @@
 local leapBackdropConfig = {
   fg = '#FF7119', -- a rust colour
 }
+
 local function setLeapBackdropHighlight()
   vim.api.nvim_set_hl(0, 'LeapBackdrop', leapBackdropConfig)
 end
 
-local function unsetLeapExtraKeybinds()
-  vim.keymap.del({ 'x', 'o' }, 'x')
-  vim.keymap.del({ 'x', 'o' }, 'X')
+local function setLeapKeybinds()
+  vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+  vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)')
 end
 
 return {
-  'ggandor/leap.nvim',
+  'https://codeberg.org/andyg/leap.nvim',
   lazy = true,
   keys = {
     {
@@ -28,8 +29,7 @@ return {
     },
   },
   config = function()
-    require('leap').add_default_mappings()
+    setLeapKeybinds();
     setLeapBackdropHighlight()
-    unsetLeapExtraKeybinds()
   end,
 }
