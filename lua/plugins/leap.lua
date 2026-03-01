@@ -6,30 +6,24 @@ local function setLeapBackdropHighlight()
   vim.api.nvim_set_hl(0, 'LeapBackdrop', leapBackdropConfig)
 end
 
-local function setLeapKeybinds()
-  vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
-  vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)')
-end
-
 return {
   'https://codeberg.org/andyg/leap.nvim',
   lazy = true,
   keys = {
     {
       's',
-      nil,
-    },
-    {
-      'S',
-      nil,
+      '<Plug>(leap)',
+      mode = { 'n', 'x', 'o' },
+      desc = 'Leap within current window',
     },
     {
       'gs',
-      nil,
+      '<Plug>(leap-from-window)',
+      mode = 'n',
+      desc = 'Leap to another window',
     },
   },
   config = function()
-    setLeapKeybinds();
     setLeapBackdropHighlight()
   end,
 }

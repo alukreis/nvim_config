@@ -22,7 +22,7 @@ return {
             angularlsModulesPath,
             '--ngProbeLocations',
             angularlsModulesPath .. '/@angular/language-server/node_modules',
-          }
+          },
         }),
         tailwindcss = defaultLspConfig,
         rust_analyzer = defaultLspConfig,
@@ -32,8 +32,8 @@ return {
   config = function(_, opts)
     for server, config in pairs(opts.servers) do
       config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-      vim.lsp.config(server, config);
-      vim.lsp.enable(server);
+      vim.lsp.config(server, config)
+      vim.lsp.enable(server)
     end
   end,
 }

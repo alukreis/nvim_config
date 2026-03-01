@@ -1,33 +1,51 @@
-local function echoErrorAndExitOnKeyPress(out)
+local lazyPath = require('config.constants').lazyPath
+
+local function echoErrorAndExitOnKeyPress(errorMsg)
   vim.api.nvim_echo({
-    { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
-    { out, 'WarningMsg' },
-    { '\nPress any key to exit...' },
-  }, true, {})
-  vim.fn.getchar()
-  os.exit(1)
+    { 'Failed to clone lazy.nvim: \n', 'ErrorMsg' },
+    { errorMsg },
+    { '\n' },
+  }, false, {})
 end
 
-local function bootstrapLazyPackageManager(lazyPath)
+local function callSystemGitCloneAndWait()
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out =
-    vim.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazyPath })
-  if vim.v.shell_error ~= 0 then
-    echoErrorAndExitOnKeyPress(out)
+  return vim.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    '--branch=stable',
+    lazyrepo,
+    lazyPath,
+  }, {
+    -- Auto fail if git prompts for information
+    env = { GIT_TERMINAL_PROMPT = "0" },
+  }):wait()
+end
+
+local function bootstrapLazyPackageManager()
+  local cloneResult = callSystemGitCloneAndWait()
+  if cloneResult.code ~= 0 then
+    echoErrorAndExitOnKeyPress(cloneResult.stderr)
+  else
+    vim.api.nvim_echo({
+      { 'Lazy was bootstrapped successfully.\n' },
+    }, false, {})
   end
 end
 
-local function configureLeaderCharacters()
-  vim.g.mapleader = ' '
-  vim.g.maplocalleader = '\\'
+local function echoLazyInstalledMessage()
+  vim.api.nvim_echo({
+    { 'Lazy package manager is already installed, you are good to go :).\n' },
+  }, false, {})
 end
 
--- Starts Here
-local lazyPath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.uv.fs_stat(lazyPath) then
-  bootstrapLazyPackageManager(lazyPath)
+local function bootstrapLazy()
+  if not vim.uv.fs_stat(lazyPath) then
+    bootstrapLazyPackageManager()
+  else
+    echoLazyInstalledMessage()
+  end
 end
--- Prepend to run time path
-vim.opt.rtp:prepend(lazyPath)
 
-configureLeaderCharacters()
+return bootstrapLazy
