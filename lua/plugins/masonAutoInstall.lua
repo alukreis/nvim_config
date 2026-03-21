@@ -15,6 +15,7 @@ return {
       "lua-language-server",
       "bash-language-server",
       "angular-language-server",
+      "sonarlint-language-server",
       "typescript-language-server",
       "tailwindcss-language-server",
     }
