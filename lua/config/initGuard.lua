@@ -1,5 +1,5 @@
 local lazyPath = require('config.constants').lazyPath
-local promptAnyKeyAndExit = require('helpers.prompts').promptAnyKeyAndExit
+local prompt_any_key_and_exit = require('helpers.prompts').prompt_any_key_and_exit
 
 local minVersion = {
   major = 0,
@@ -7,17 +7,17 @@ local minVersion = {
   patch = 0,
 }
 
-local function formatNvimVersion(version)
+local function format_nvim_version(version)
   return string.format('%d.%d.%d', version.major, version.minor, version.patch)
 end
 
-local function printVersionErrorMessage()
+local function print_version_error_message()
   vim.api.nvim_echo(
     {
       { 'Neovim version is ' },
-      { formatNvimVersion(vim.version()) },
+      { format_nvim_version(vim.version()) },
       { ' Minimum required version is ' },
-      { formatNvimVersion(minVersion) },
+      { format_nvim_version(minVersion) },
       { '\n' },
     },
     false,
@@ -27,14 +27,14 @@ local function printVersionErrorMessage()
   )
 end
 
-local function assertNvimVersion()
+local function assert_nvim_version()
   if vim.version.lt(vim.version(), minVersion) then
-    printVersionErrorMessage()
-    promptAnyKeyAndExit()
+    print_version_error_message()
+    prompt_any_key_and_exit()
   end
 end
 
-local function printNoLazyErrorMessage()
+local function print_no_lazy_error_message()
   local configPath = vim.fn.stdpath('config')
   vim.api.nvim_echo(
     {
@@ -49,12 +49,12 @@ local function printNoLazyErrorMessage()
   )
 end
 
-local function assertLazyInstall()
+local function assert_lazy_install()
   if not vim.uv.fs_stat(lazyPath) then
-    printNoLazyErrorMessage()
-    promptAnyKeyAndExit()
+    print_no_lazy_error_message()
+    prompt_any_key_and_exit()
   end
 end
 
-assertNvimVersion()
-assertLazyInstall()
+assert_nvim_version()
+assert_lazy_install()

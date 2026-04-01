@@ -1,4 +1,4 @@
-local function promptAnyKeyAndExit()
+local function prompt_any_key_and_exit()
   vim.api.nvim_echo({
     { 'Press any key to exit.\n' },
   }, false, {})
@@ -7,5 +7,5 @@ local function promptAnyKeyAndExit()
 end
 
 return {
-  promptAnyKeyAndExit = promptAnyKeyAndExit,
+  prompt_any_key_and_exit = prompt_any_key_and_exit,
 }
