@@ -33,10 +33,15 @@ local function toggle_numbers()
   set_numbers(not currentValue)
 end
 
+local function set_session_options()
+  vim.opt.sessionoptions:append('globals')
+end
+
 return {
   set_mouse = set_mouse,
   set_numbers = set_numbers,
   toggle_numbers = toggle_numbers,
+  set_session_options = set_session_options,
   set_default_indent_size = set_default_indent_size,
   set_default_tabs_or_spaces = set_default_tabs_or_spaces,
   set_default_shell_if_windows = set_default_shell_if_windows,
