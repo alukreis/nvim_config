@@ -35,6 +35,7 @@ end
 
 local function set_session_options()
   vim.opt.sessionoptions:append('globals')
+  vim.opt.sessionoptions:remove('terminal')
 end
 
 return {
