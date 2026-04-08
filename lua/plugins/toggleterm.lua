@@ -1,20 +1,4 @@
-local function terminal_has_name(name)
-  return function(terminal)
-    return terminal.display_name == name
-  end
-end
-
-local function toggle_named_term(name)
-  local termModule = require('toggleterm.terminal')
-  local Terminal = termModule.Terminal
-
-  local term = termModule.find(terminal_has_name(name))
-    or Terminal:new({
-      display_name = name,
-    })
-
-  term:toggle()
-end
+local terminals = require('helpers.terminals')
 
 return {
   'akinsho/toggleterm.nvim',
@@ -24,16 +8,12 @@ return {
   keys = {
     {
       '<leader>tg',
-      function()
-        toggle_named_term('General')
-      end,
+      terminals.toggle_general_term,
       mode = 'n',
     },
     {
       '<leader>tt',
-      function()
-        toggle_named_term('Testing')
-      end,
+      terminals.toggle_testing_term,
       mode = 'n',
     },
   },

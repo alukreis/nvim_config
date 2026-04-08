@@ -1,3 +1,4 @@
+require('env').setup()
 require('config.globalOptions')
 if not vim.g.is_headless then
   if vim.g.enable_plugins then
@@ -6,6 +7,7 @@ if not vim.g.is_headless then
     require('lazy').setup('plugins')
   end
 
+  require('config.editorconfig')
   require('config.keymaps')
   require('config.options')
 end
