@@ -15,10 +15,15 @@ local function get_system_info()
   }
 end
 
+local function does_start_with(basePath, fullPath)
+  local escapedBase = basePath:gsub('%-', '%%-')
+  local baseMatch = ('^%s/'):format(escapedBase)
+  return fullPath:match(baseMatch) == nil
+end
+
 local function validate_paths(basePath, fullPath)
   local systemInfo = get_system_info()
   local system, validRegex = systemInfo.system, systemInfo.validRegex
-
   if basePath:match(validRegex) == nil then
     error(get_error_msg({
       path = basePath,
@@ -31,7 +36,7 @@ local function validate_paths(basePath, fullPath)
       system = system,
       pathType = 'full',
     }))
-  elseif basePath ~= fullPath and fullPath:match(('^%s/'):format(basePath)) == nil then
+  elseif basePath ~= fullPath and does_start_with(basePath, fullPath) then
     error(("Full path '%s' does not start with base '%s'"):format(fullPath, basePath))
   end
 end

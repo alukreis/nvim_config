@@ -51,6 +51,12 @@ describe('get_relative_path', function()
       local fullPath2 = '/other/place/to/work/with/others.lua'
       assert.are_equal('with/others.lua', get_relative_path(basePath2, fullPath2))
     end)
+
+    it('handles paths with dashes and underscores', function()
+      local basePath = '/the/re-path/you_know'
+      local fullPath = '/the/re-path/you_know/what/know'
+      assert.are_equal('what/know', get_relative_path(basePath, fullPath))
+    end)
   end)
 
   insulate('windows', function()
