@@ -12,6 +12,7 @@ return {
       css = prettierdConfig,
       scss = prettierdConfig,
       json = prettierdConfig,
+      rust = { 'rustfmt' },
       python = { 'black' },
       javascript = prettierdConfig,
       typescript = prettierdConfig,
