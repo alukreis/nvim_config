@@ -18,7 +18,7 @@ end
 local function does_start_with(basePath, fullPath)
   local escapedBase = basePath:gsub('%-', '%%-')
   local baseMatch = ('^%s/'):format(escapedBase)
-  return fullPath:match(baseMatch) == nil
+  return fullPath:match(baseMatch) ~= nil
 end
 
 local function validate_paths(basePath, fullPath)
@@ -36,15 +36,19 @@ local function validate_paths(basePath, fullPath)
       system = system,
       pathType = 'full',
     }))
-  elseif basePath ~= fullPath and does_start_with(basePath, fullPath) then
+  elseif basePath ~= fullPath and not does_start_with(basePath, fullPath) then
     error(("Full path '%s' does not start with base '%s'"):format(fullPath, basePath))
   end
 end
 
 local function get_relative_path(basePath, fullPath)
-  local normalisedBasePath = vim.fs.normalize(basePath)
-  validate_paths(normalisedBasePath, fullPath)
-  return basePath == fullPath and '.' or vim.fs.relpath(basePath, fullPath)
+  local systemInfo = get_system_info()
+  local normalisedBasePath = vim.fs.normalize(basePath, { win = systemInfo.system == 'windows'})
+  local normalisedFullPath = vim.fs.normalize(fullPath, { win = systemInfo.system == 'windows'})
+  vim.print(normalisedBasePath)
+  vim.print(normalisedFullPath)
+  validate_paths(normalisedBasePath, normalisedFullPath)
+  return basePath == fullPath and '.' or vim.fs.relpath(normalisedBasePath, normalisedFullPath)
 end
 
 return {

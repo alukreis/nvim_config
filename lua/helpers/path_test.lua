@@ -73,13 +73,13 @@ describe('get_relative_path', function()
       osNameSpy:revert()
     end)
 
-    it('also errors if invalid normalised path on windows', function()
+    it('also errors if invalid path on windows', function()
       assert.error(function ()
-        get_relative_path('wbase', 'C:/full')
+        get_relative_path('wbase', 'C:\\full')
       end, "Invalid windows base path 'wbase'")
 
       assert.error(function ()
-        get_relative_path('D:/base', 'wfull')
+        get_relative_path('D:\\base', 'wfull')
       end, "Invalid windows full path 'wfull'")
 
       assert.error(function ()
@@ -88,21 +88,23 @@ describe('get_relative_path', function()
     end)
 
     it('errors if full path does not start with base path', function()
-      local basePath1 = 'D:/current/working/dir'
-      local fullPath1 = 'C:/current/working/dir/where/you/go'
+      local basePath = [[D:\current\working\dir]]
+      local fullPath = [[C:\current\working\dir\where\you\go]]
+      local normalisedBasePath = vim.fs.normalize(basePath, { win = true })
+      local normalisedFullPath = vim.fs.normalize(fullPath, { win = true })
       assert.error(function ()
-        get_relative_path(basePath1, fullPath1)
-      end, ("Full path '%s' does not start with base '%s'"):format(fullPath1, basePath1))
+        get_relative_path(basePath, fullPath)
+      end, ("Full path '%s' does not start with base '%s'"):format(normalisedFullPath, normalisedBasePath))
     end)
 
     it('returns a dot if both paths are the same', function()
-      assert.are_equal('.', get_relative_path('E:/same', 'E:/same'))
+      assert.are_equal('.', get_relative_path('E:\\same', 'E:\\same'))
     end)
 
     it('returns the relative path', function()
-      local basePath = 'C:/current/working/dir'
-      local fullPath = 'C:/current/working/dir/where/you/go'
-      assert.are_equal('where/you/go', get_relative_path(basePath, fullPath))
+      local basePath = [[C:\current\working\dir]]
+      local fullPath = [[C:\current\working\dir\where\you\go]]
+      assert.are_equal([[where/you/go]], get_relative_path(basePath, fullPath))
     end)
   end)
 end)
