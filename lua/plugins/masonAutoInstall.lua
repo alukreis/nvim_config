@@ -7,6 +7,7 @@ return {
   opts = {
     packages = {
       'black',
+      'jdtls',
       'stylua',
       'eslint_d',
       'prettierd',

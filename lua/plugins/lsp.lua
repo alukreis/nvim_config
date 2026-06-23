@@ -9,6 +9,7 @@ return {
       vim.fn.expand('$MASON/packages/angular-language-server/node_modules')
     return {
       servers = {
+        jdtls = defaultLspConfig,
         pylsp = defaultLspConfig,
         ts_ls = defaultLspConfig,
         lua_ls = defaultLspConfig,
