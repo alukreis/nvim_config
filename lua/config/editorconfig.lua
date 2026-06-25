@@ -13,4 +13,3 @@ editorconfig.properties.file_test_command = function(bufNumber, val)
     )
   end
 end
-

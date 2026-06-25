@@ -5,15 +5,15 @@ describe('get_relative_path', function()
   local get_relative_path = path.get_relative_path
   insulate('unix', function()
     it('returns an error with a nil result if either path does not start with a /', function()
-      assert.error(function ()
+      assert.error(function()
         get_relative_path('base', '/full')
       end, "Invalid unix base path 'base'")
 
-      assert.error(function ()
+      assert.error(function()
         get_relative_path('/base', 'full')
       end, "Invalid unix full path 'full'")
 
-      assert.error(function ()
+      assert.error(function()
         get_relative_path('otherBase', 'full')
       end, "Invalid unix base path 'otherBase'")
     end)
@@ -21,19 +21,19 @@ describe('get_relative_path', function()
     it('errors if full path does not start with base path', function()
       local basePath2 = '/current/woking/dir'
       local fullPath2 = '/current/working/dir/where/you/go'
-      assert.error(function ()
+      assert.error(function()
         get_relative_path(basePath2, fullPath2)
       end, ("Full path '%s' does not start with base '%s'"):format(fullPath2, basePath2))
 
       local basePath3 = '/current/working/di'
       local fullPath3 = '/current/working/dir/where/you/go'
-      assert.error(function ()
+      assert.error(function()
         get_relative_path(basePath3, fullPath3)
       end, ("Full path '%s' does not start with base '%s'"):format(fullPath3, basePath3))
 
       local basePath4 = '/current/working/d'
       local fullPath4 = '/current/working/dir'
-      assert.error(function ()
+      assert.error(function()
         get_relative_path(basePath4, fullPath4)
       end, ("Full path '%s' does not start with base '%s'"):format(fullPath4, basePath4))
     end)
@@ -62,27 +62,27 @@ describe('get_relative_path', function()
   insulate('windows', function()
     local osNameSpy
 
-    before_each(function ()
+    before_each(function()
       local originalUname = vim.uv.os_uname()
       osNameSpy = stub(vim.uv, 'os_uname', function()
         return shallow_merge(originalUname, { sysname = 'Windows_NT' })
       end)
     end)
 
-    after_each(function ()
+    after_each(function()
       osNameSpy:revert()
     end)
 
     it('also errors if invalid path on windows', function()
-      assert.error(function ()
+      assert.error(function()
         get_relative_path('wbase', 'C:\\full')
       end, "Invalid windows base path 'wbase'")
 
-      assert.error(function ()
+      assert.error(function()
         get_relative_path('D:\\base', 'wfull')
       end, "Invalid windows full path 'wfull'")
 
-      assert.error(function ()
+      assert.error(function()
         get_relative_path('wotherBase', 'full')
       end, "Invalid windows base path 'wotherBase'")
     end)
@@ -92,9 +92,15 @@ describe('get_relative_path', function()
       local fullPath = [[C:\current\working\dir\where\you\go]]
       local normalisedBasePath = vim.fs.normalize(basePath, { win = true })
       local normalisedFullPath = vim.fs.normalize(fullPath, { win = true })
-      assert.error(function ()
-        get_relative_path(basePath, fullPath)
-      end, ("Full path '%s' does not start with base '%s'"):format(normalisedFullPath, normalisedBasePath))
+      assert.error(
+        function()
+          get_relative_path(basePath, fullPath)
+        end,
+        ("Full path '%s' does not start with base '%s'"):format(
+          normalisedFullPath,
+          normalisedBasePath
+        )
+      )
     end)
 
     it('returns a dot if both paths are the same', function()

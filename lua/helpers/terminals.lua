@@ -8,10 +8,9 @@ local function get_term_by_name(name)
   local termModule = require('toggleterm.terminal')
   local Terminal = termModule.Terminal
 
-  return termModule.find(terminal_has_name(name))
-    or Terminal:new({
-      display_name = name,
-    })
+  return termModule.find(terminal_has_name(name)) or Terminal:new({
+    display_name = name,
+  })
 end
 
 local function toggle_general_term()

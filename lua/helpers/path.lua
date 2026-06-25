@@ -43,8 +43,8 @@ end
 
 local function get_relative_path(basePath, fullPath)
   local systemInfo = get_system_info()
-  local normalisedBasePath = vim.fs.normalize(basePath, { win = systemInfo.system == 'windows'})
-  local normalisedFullPath = vim.fs.normalize(fullPath, { win = systemInfo.system == 'windows'})
+  local normalisedBasePath = vim.fs.normalize(basePath, { win = systemInfo.system == 'windows' })
+  local normalisedFullPath = vim.fs.normalize(fullPath, { win = systemInfo.system == 'windows' })
   vim.print(normalisedBasePath)
   vim.print(normalisedFullPath)
   validate_paths(normalisedBasePath, normalisedFullPath)

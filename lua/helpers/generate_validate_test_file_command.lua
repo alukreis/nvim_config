@@ -72,4 +72,3 @@ local function generate_validate_test_file_command(bufNumber, val)
 end
 
 return generate_validate_test_file_command
-
